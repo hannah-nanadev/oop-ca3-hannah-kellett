@@ -1,9 +1,10 @@
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Stack;
 
 /**
- *  Name:
- *  Class Group:
+ *  Name: Hannah Kellett
+ *  Class Group: GD2B
  */
 public class CA3_Question2
 {
@@ -44,8 +45,14 @@ public class CA3_Question2
 
     public static void start()
     {
-       int[][] arr = floodFillStart();
+        int[][] arr = floodFillStart();
+
+        arr[0][3] = 5;
+        arr[7][0] = 5;
+
+        System.out.println(Arrays.toString(arr[0]));
     }
+
     public static void main(String[] args) {
         start();
     }
