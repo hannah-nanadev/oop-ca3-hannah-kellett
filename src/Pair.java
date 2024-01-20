@@ -58,11 +58,19 @@ public class Pair {
     public void setRowValue(int idx, int val)
     {
         this.row[idx] = val;
+        if(idx==0)
+        {
+            this.column[idx] = val;
+        }
     }
 
     public void setColValue(int idx, int val)
     {
         this.column[idx] = val;
+        if(idx==0)
+        {
+            this.row[idx] = val;
+        }
     }
 
     public int getRowValue(int idx)

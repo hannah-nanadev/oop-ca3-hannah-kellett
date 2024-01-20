@@ -57,9 +57,12 @@ public class CA3_Question2
 
             for(int i = 0; i<current.getLength(); i++)
             {
-                if(current.getRowValue(i)==0||current.getColumnValue(i)==0)
+                if(current.getRowValue(i)==0)
                 {
                     current.setRowValue(i, j);
+                }
+                if(current.getColumnValue(i)==0)
+                {
                     current.setColValue(i, j);
                 }
             }
