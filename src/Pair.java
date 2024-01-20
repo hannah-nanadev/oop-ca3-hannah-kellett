@@ -34,9 +34,14 @@ public class Pair {
         return this.row;
     }
 
+    public int getLength()
+    {
+        return this.row.length;
+    }
+
     public void copyToRow(int roNo, int[][] to)
     {
-        for(int i = 0; i<this.row.length; i++)
+        for(int i = 0; i<getLength(); i++)
         {
             to[roNo][i] = this.row[i];
         }
@@ -44,7 +49,7 @@ public class Pair {
 
     public void copyToColumn(int colNo, int[][] to)
     {
-        for(int i = 0; i<this.column.length; i++)
+        for(int i = 0; i<getLength(); i++)
         {
             to[i][colNo] = this.column[i];
         }
@@ -58,5 +63,14 @@ public class Pair {
     public void setColValue(int idx, int val)
     {
         this.column[idx] = val;
+    }
+
+    public int getRowValue(int idx)
+    {
+        return this.row[idx];
+    }
+    public int getColumnValue(int idx)
+    {
+        return this.column[idx];
     }
 }

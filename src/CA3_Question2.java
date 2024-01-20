@@ -38,21 +38,50 @@ public class CA3_Question2
             System.out.println();
         }
     }
-    private static void fill(int r, int c, int[][] arr, int val)
+    private static void floodFill(int[][] arr)
     {
-        Pair pair = new Pair(arr, r, c);
+        Stack<Pair> pairs = new Stack<>();
 
+        for(int i = 0; i<arr[0].length; i++) //Assumes square matrix
+        {
+            pairs.push(new Pair(arr, i, i));
+        }
+
+        int j = 1;
+
+        int pairNo = 0;
+
+        while(!pairs.isEmpty())
+        {
+            Pair current = pairs.pop();
+
+            for(int i = 0; i<current.getLength(); i++)
+            {
+                if(current.getRowValue(i)==0||current.getColumnValue(i)==0)
+                {
+                    current.setRowValue(i, j);
+                    current.setColValue(i, j);
+                }
+            }
+
+            j++;
+
+            current.copyToRow(pairNo, arr);
+            current.copyToColumn(pairNo, arr);
+
+            pairNo++;
+
+        }
 
     }
 
     public static void start()
     {
         int[][] arr = floodFillStart();
+        floodFill(arr);
 
-        arr[0][3] = 5;
-        arr[7][0] = 5;
+        display(arr);
 
-        System.out.println(Arrays.toString(arr[0]));
     }
 
     public static void main(String[] args) {
