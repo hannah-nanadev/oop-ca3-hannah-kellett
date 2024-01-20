@@ -38,8 +38,10 @@ public class CA3_Question2
             System.out.println();
         }
     }
-    private static void fill(int r, int c, int[][] arr)
+    private static void fill(int r, int c, int[][] arr, int val)
     {
+        Pair pair = new Pair(arr, r, c);
+
 
     }
 
