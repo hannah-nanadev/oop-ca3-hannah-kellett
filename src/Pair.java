@@ -55,6 +55,28 @@ public class Pair {
         }
     }
 
+    public void owRowNotZero(int roNo, int[][] to)
+    {
+        for(int i = 0; i<getLength(); i++)
+        {
+            if(to[roNo][i]==0)
+            {
+                to[roNo][i] = this.row[i];
+            }
+        }
+    }
+
+    public void owColNotZero(int colNo, int[][] to)
+    {
+        for(int i = 0; i<getLength(); i++)
+        {
+            if(to[i][colNo]==0)
+            {
+                to[i][colNo] = this.row[i];
+            }
+        }
+    }
+
     public void setRowValue(int idx, int val)
     {
         this.row[idx] = val;

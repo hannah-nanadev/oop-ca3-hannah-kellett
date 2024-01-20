@@ -69,8 +69,8 @@ public class CA3_Question2
 
             j++;
 
-            current.copyToRow(pairNo, arr);
-            current.copyToColumn(pairNo, arr);
+            current.owRowNotZero(pairNo, arr);
+            current.owColNotZero(pairNo, arr);
 
             pairNo++;
 
