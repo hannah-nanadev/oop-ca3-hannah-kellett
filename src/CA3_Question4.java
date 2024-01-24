@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Stack;
 /**
@@ -13,7 +14,40 @@ public class CA3_Question4 {
      */
     public static boolean validate(String filename) throws FileNotFoundException
     {
-        return false;
+        File file = new File(filename);
+        Scanner in = new Scanner(file);
+        Stack<String> tags = new Stack<>();
+        ArrayList<String> unresolved = new ArrayList<>();
+        boolean isValid = true;
+
+        while(in.hasNext())
+        {
+            tags.push(in.next());
+        }
+
+        while(!tags.isEmpty())
+        {
+            String current = tags.pop();
+            if(current.contains("/"))
+            {
+                unresolved.add(current);
+            }
+            else
+            {
+                String closed = current.replace("<", "</");
+                if(!unresolved.contains(closed))
+                {
+                    tags.empty();
+                    isValid = false;
+                }
+                else
+                {
+                    unresolved.remove("closed");
+                }
+            }
+
+        }
+        return isValid;
     }
 
     /*
