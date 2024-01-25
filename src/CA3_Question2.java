@@ -45,54 +45,39 @@ public class CA3_Question2
         cells.push(new Cell(0, 0));
         int i = 1;
 
-        while(!cells.isEmpty()&&arrContains(arr, 0))
+        while(!cells.isEmpty())
         {
             Cell current = cells.pop();
             int x = current.getX(); int y = current.getY();
-            arr[x][y] = i;
-
-            //Check if neighbours are there and are equal to 0
-            if(x<9&&arr[x+1][y]==0)
+            if(arr[x][y]==0)
             {
-                cells.push(new Cell(x+1, y));
-            }
-            if(y<9&&arr[x][y+1]==0)
-            {
-                cells.push(new Cell(x, y+1));
-            }
-            if(x>0&&arr[x-1][y]==0)
-            {
-                cells.push(new Cell(x-1, y));
-            }
-            if(y>0&&arr[x][y-1]==0)
-            {
-                cells.push(new Cell(x, y-1));
-            }
+                arr[x][y] = i;
 
-            i++;
-
-        }
-
-    }
-
-    private static boolean arrContains(int[][] arr, int a)
-    {
-        int max = arr[0].length;
-        boolean result = false;
-
-        for(int i = 0; i<max; i++)
-        {
-            for(int j = 0; j<max; j++)
-            {
-                if(arr[i][j]==a)
+                //Check if neighbours are there and are equal to 0
+                if(x<9&&arr[x+1][y]==0)
                 {
-                    result = true;
+                    cells.push(new Cell(x+1, y));
                 }
+                if(y<9&&arr[x][y+1]==0)
+                {
+                    cells.push(new Cell(x, y+1));
+                }
+                if(x>0&&arr[x-1][y]==0)
+                {
+                    cells.push(new Cell(x-1, y));
+                }
+                if(y>0&&arr[x][y-1]==0)
+                {
+                    cells.push(new Cell(x, y-1));
+                }
+
+                i++;
             }
+
         }
 
-        return result;
     }
+    
 
     public static void start()
     {
