@@ -1,6 +1,7 @@
 public class Pair {
 
     //Pair class will assume a square matrix.
+    //DEPRECATED CODE DO NOT USE
     private int[] row;
     private int[] column;
 
