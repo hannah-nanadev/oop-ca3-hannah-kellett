@@ -38,11 +38,11 @@ public class CA3_Question2
             System.out.println();
         }
     }
-    private static void floodFill(int[][] arr)
+    private static void floodFill(int[][] arr, int startX, int startY)
     {
         Stack<Cell> cells = new Stack<>();
 
-        cells.push(new Cell(0, 0));
+        cells.push(new Cell(startX, startY));
         int i = 1;
 
         while(!cells.isEmpty())
@@ -77,12 +77,12 @@ public class CA3_Question2
         }
 
     }
-    
+
 
     public static void start()
     {
         int[][] arr = floodFillStart();
-        floodFill(arr);
+        floodFill(arr, 5, 5);
 
         display(arr);
 
