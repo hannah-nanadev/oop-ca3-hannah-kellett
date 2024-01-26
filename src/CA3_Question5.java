@@ -9,68 +9,89 @@ import java.util.Scanner;
  *  Class Group: GD2B
  */
 
-public class CA3_Question5
-{
+public class CA3_Question5 {
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         Queue<String> takingoff = new LinkedList<>();
         Queue<String> landing = new LinkedList<>();
         Queue<String> tasks = new LinkedList<>();
 
         boolean running = true;
-        while(running)
-        {
+        while (running) {
             Scanner input = new Scanner(System.in);
             System.out.print("Enter command\n>");
             String cmd = input.nextLine();
 
-            if(validate(cmd))
-            {
-                System.out.println("Command is valid.");
-            }
-            else
-            {
-                System.out.println("Invalid command. Try again.");
-            }
+            running = parse(cmd, takingoff, landing, tasks);
 
         }
     }
 
-    private static ArrayList<String> validCmds()
-    {
-        ArrayList<String> val = new ArrayList<>(Arrays.asList("takeoff", "land", "next", "quit"));
-        return val;
-    }
-
-    private static boolean validate(String input)
-    {
+    private static boolean parse(String input, Queue<String> takeoff,
+                              Queue<String> landing, Queue<String> tasks) {
         Scanner read = new Scanner(input);
         String cmd = read.next();
+        String arg;
 
-        if(validCmds().contains(cmd))
-        {
-            return true;
-        } else return false;
-    }
+        boolean run = true;
 
-    private static void parse(String input)
-    {
-        Scanner read = new Scanner(input);
-        String cmd = read.next();
-        String arg = read.next();
-
-        switch(cmd)
-        {
+        switch (cmd) {
             case "takeoff":
+                arg = read.next();
+                queueTask(cmd, arg, takeoff, tasks);
                 break;
             case "land":
+                arg = read.next();
+                queueTask(cmd, arg, landing, tasks);
                 break;
             case "next":
+                evalTask(tasks, takeoff, landing);
                 break;
             case "quit":
+                System.out.println("Ending simulation.");
+                run = false;
+                break;
+            default:
+                System.out.println("Invalid command. Please try again.");
                 break;
         }
 
+        return run;
     }
+
+    private static void queueTask(String cmd, String arg, Queue<String> q, Queue<String> taskQueue) {
+        q.add(arg);
+        taskQueue.add(cmd);
+
+        System.out.println("Plane " + arg + " added to queue " + cmd);
+    }
+
+    private static void evalTask(Queue<String> tasks, Queue<String> takeoff, Queue<String> landing)
+    {
+        if(!tasks.isEmpty())
+        {
+            String task = tasks.remove();
+            String arg;
+
+            switch (task) {
+                case "takeoff":
+                    arg = takeoff.remove();
+                    System.out.println("Flight " + arg + " has taken off.");
+                    break;
+                case "land":
+                    arg = landing.remove();
+                    System.out.println("Flight " + arg + " has landed.");
+                    break;
+                default:
+                    System.out.println("Invalid command in queue.\n" +
+                            "This message should not appear. Please report the issue.");
+                    break;
+            }
+        }
+        else
+        {
+            System.out.println("No tasks in queue.");
+        }
+    }
+
 }
