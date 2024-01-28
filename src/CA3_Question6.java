@@ -3,7 +3,7 @@ import java.util.Queue;
 import java.util.LinkedList;
 /**
  *  Name: Hannah Kellett
- *  Class Group:
+ *  Class Group: GD2B
  */
 public class CA3_Question6
 {
@@ -22,8 +22,13 @@ public class CA3_Question6
 
         Scanner in = new Scanner(System.in);
         String command="";
+        int sharesTotal = 0;
+
+        System.out.println("Syntax:\nbuy <quantity of shares> <price per share>" +
+                "\nsell <quantity of shares> <price per share>");
+
             do {
-            System.out.print(">");
+            System.out.print("Enter command.\n>");
             command = in.next();
             if(command.equalsIgnoreCase("buy"))
             {
@@ -38,16 +43,51 @@ public class CA3_Question6
                 int qty = in.nextInt();
                 double price = in.nextDouble();
 
-                double totalPrice = qty*price;
-                double profit;
-
-                int topQty = shares.peek().getQuantity();
-
-                if(topQty<=qty)
+                double sellPrice = qty*price;
+                if(qty<=sharesTotal||!shares.isEmpty())
                 {
-                    
+                    int sold = qty;
+                    double profit;
+                    double buyPrices = 0;
+
+                    while(sold>0)
+                    {
+                        int topQty = shares.peek().getQuantity();
+
+                        if(sold<=topQty){
+                            buyPrices = buyPrices+(sold*shares.peek().getPrice());
+                            shares.peek().setQuantity(topQty-sold);
+                            sold = 0;
+                        }
+                        else
+                        {
+                            buyPrices = buyPrices+(shares.peek().getCost());
+                            sold = sold-shares.peek().getQuantity();
+                            shares.remove();
+                        }
+
+                        if(shares.peek().getQuantity()==0)
+                        {
+                            shares.remove();
+                        }
+                    }
+
+                    profit = sellPrice-buyPrices;
+                    System.out.println("Earnings from selling shares: " + profit);
+
+                }
+                else{
+                    System.out.println("You don't have that many shares.");
                 }
             }
+
+            //Calculate current number of shares
+            sharesTotal = 0;
+            for(int i = 0; i<shares.size(); i++)
+            {
+                sharesTotal = sharesTotal+shares.peek().getQuantity();
+            }
+
         }while(!command.equalsIgnoreCase("quit"));
     }
 }
