@@ -1,6 +1,6 @@
 /**
- *  Name:
- *  Class Group:
+ *  Name: Hannah Kellett
+ *  Class Group: GD2B
  */
 
 /*
