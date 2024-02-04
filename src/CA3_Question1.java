@@ -23,13 +23,13 @@ public class CA3_Question1
                     "Driveway: " + driveway.toString()
                 + "\nWhat do you want to do?"
                 + "\nType in a positive integer to add a car or a negative integer to remove it."
-                + "\nType 'STOP' to stop."
+                + "\nType '0' to stop."
             );
 
             Scanner input = new Scanner(System.in);
 
             String in = input.nextLine();
-            if(in.equals("STOP")) //End loop if "STOP" - otherwise attempt to cast to int and do operation on stack
+            if(in.equals("0")) //End loop if "0" - otherwise attempt to cast to int and do operation on stack
             {
                 running = false;
                 System.out.println("Simulation stopping. Thank you!");
