@@ -13,7 +13,7 @@ enum DIRECTION {NORTH, SOUTH,EAST,WEST};
 public class CA3_Question9 {
 
     public static void main(String[] args) {
-        int[][] maze = mazeGen(7, 7);
+        int[][] maze = mazeGen();
         display(maze);
     }
 
@@ -26,58 +26,37 @@ public class CA3_Question9 {
         }
     }
 
-    public static int[][] mazeGen(int x, int y)
-    { //Generates maze for rest of program to solve
-        int[][] maze = new int[x][y];
-        for(int i = 0; i<x; i++)
-        {
+    public static int[][] mazeGen()
+    { //Builds maze for rest of program to solve
+        int[][] maze = new int[7][7];
+        for(int i = 0; i<7; i++) {
             //Fill maze with 0, -1 at edges
-            for(int j = 0; j<y; j++)
-            {
-                if(i==0||j==0||i==x-1||j==y-1)
-                {
+            for (int j = 0; j < 7; j++) {
+                if (i == 0 || j == 0 || i == 6 || j == 6) {
                     maze[i][j] = -1;
-                }
-                else{
+                } else {
                     maze[i][j] = 0;
                 }
             }
-
-            Random r = new Random();
-            int side = r.nextInt(2);
-            int side2 = r.nextInt(2);
-            int pos;
-
-            switch(side)
-            {
-                case 0:
-                    pos = r.nextInt(x);
-
-                    switch(side2)
-                    {
-                        case 0:
-                            maze[0][pos] = 0;
-                            break;
-                        case 1:
-                            maze[x-1][pos] = 0;
-                            break;
-                    }
-                    break;
-                case 1:
-                    pos = r.nextInt(y);
-
-                    switch(side2)
-                    {
-                        case 0:
-                            maze[pos][0] = 0;
-                            break;
-                        case 1:
-                            maze[pos][y-1] = 0;
-                            break;
-                    }
-                    break;
-            }
         }
+
+        maze[3][0] = 0; //add gap
+
+        //Add some lines
+        for(int i = 1; i<3; i++)
+        {
+            maze[2][i] = -1;
+            maze[4][i] = -1;
+        }
+
+        for(int i = 4; i<6; i++)
+        {
+            maze[2][i] = -1;
+            maze[4][i] = -1;
+        }
+
+        maze[1][1] = -1;
+        maze[5][5] = -1;
 
         return maze;
 
