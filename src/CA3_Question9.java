@@ -101,21 +101,21 @@ public class CA3_Question9 {
                 else
                 {
                     //Push nearby unexplored paths onto stack
-                    if(maze[x-1][y]==0)
+                    if(maze[x][y+1]==0) //North
                     {
-                        unexplored.push(new Cell(x-1, y));
+                        unexplored.push(new Cell(x, y+1));
                     }
-                    if(maze[x+1][y]==0)
+                    if(maze[x+1][y]==0) //East
                     {
                         unexplored.push(new Cell(x+1, y));
                     }
-                    if(maze[x][y-1]==0)
+                    if(maze[x][y-1]==0) //South
                     {
                         unexplored.push(new Cell(x, y-1));
                     }
-                    if(maze[x][y+1]==0)
+                    if(maze[x-1][y]==0) //West
                     {
-                        unexplored.push(new Cell(x, y+1));
+                        unexplored.push(new Cell(x-1, y));
                     }
                 }
             }
