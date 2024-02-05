@@ -1,4 +1,4 @@
-import java.util.Random;
+import java.util.Stack;
 
 /**
  *  Name: Hannah Kellett
@@ -15,6 +15,22 @@ public class CA3_Question9 {
     public static void main(String[] args) {
         int[][] maze = mazeGen();
         display(maze);
+
+        Stack<Cell> unexplored = new Stack<>();
+        unexplored.push(new Cell(3,3));
+
+        int i = 1;
+
+        //Repeatedly solve until stack is empty
+        while(!unexplored.isEmpty())
+        {
+            Cell current = unexplored.pop();
+            solve(current.getX(), current.getY(), maze, unexplored);
+            System.out.println("Step " + i);
+            display(maze);
+            i++;
+        }
+
     }
 
     public static void display(int[][] image) {
@@ -62,8 +78,49 @@ public class CA3_Question9 {
 
     }
 
-    public void solve(int x, int y, DIRECTION dir)
+    public static void solve(int x, int y, int[][] maze, Stack<Cell> unexplored)
     {
+        try
+        { //Try/catch block to make sure cell exists
+            if(maze[x][y]==-1)
+            {
+                System.out.println("Unable to solve - Function was placed into wall.");
+            }
+            else
+            {
+                maze[x][y] = 2;
 
+                if(x==0||y==0||x==6||y==6) //Assumes maze size of 7x7
+                {
+                    System.out.println("Exit reached!");
+                    while(!unexplored.isEmpty()) //Empty stack to signal that it's done
+                    {
+                        unexplored.pop();
+                    }
+                }
+                else
+                {
+                    //Push nearby unexplored paths onto stack
+                    if(maze[x-1][y]==0)
+                    {
+                        unexplored.push(new Cell(x-1, y));
+                    }
+                    if(maze[x+1][y]==0)
+                    {
+                        unexplored.push(new Cell(x+1, y));
+                    }
+                    if(maze[x][y-1]==0)
+                    {
+                        unexplored.push(new Cell(x, y-1));
+                    }
+                    if(maze[x][y+1]==0)
+                    {
+                        unexplored.push(new Cell(x, y+1));
+                    }
+                }
+            }
+        }catch(Exception e){
+            System.out.println("Invalid position was passed to function. Ignoring.");
+        }
     }
 }
