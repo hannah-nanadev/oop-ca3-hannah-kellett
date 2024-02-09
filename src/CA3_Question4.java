@@ -20,13 +20,14 @@ public class CA3_Question4 {
         ArrayList<String> unresolved = new ArrayList<>();
         boolean isValid = true;
 
+        //Push all tags to stack
         while(in.hasNext())
         {
             tags.push(in.next());
         }
 
         while(!tags.isEmpty())
-        {
+        { //Go through stack - if a </> comes up before its <> add it to an arraylist until finding its <>
             String current = tags.pop();
             if(current.contains("/"))
             {
@@ -34,15 +35,15 @@ public class CA3_Question4 {
             }
             else
             {
-                String closed = current.replace("<", "</");
-                if(!unresolved.contains(closed))
+                String closed = current.replace("<", "</"); //Turn tag into closed tag to compare
+                if(!unresolved.contains(closed)) //If converted tag has not already appeared, the string is invalid
                 {
                     tags.empty();
                     isValid = false;
                 }
-                else
+                else //otherwise remove unresolved tag
                 {
-                    unresolved.remove("closed");
+                    unresolved.remove(closed);
                 }
             }
 
@@ -59,6 +60,7 @@ public class CA3_Question4 {
 
      */
     public static void main(String[] args) throws FileNotFoundException {
+        //Main - take two files and check if they are valid or not
         String[] files = {"tags_valid.txt", "tags_invalid.txt"};
         for(String fName: files) {
             System.out.print(fName +": ");

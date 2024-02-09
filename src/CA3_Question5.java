@@ -10,12 +10,14 @@ import java.util.Scanner;
 public class CA3_Question5 {
 
     public static void main(String[] args) {
+        //Initialise queues
         Queue<String> takingoff = new LinkedList<>();
         Queue<String> landing = new LinkedList<>();
         Queue<String> tasks = new LinkedList<>();
 
         boolean running = true;
         while (running) {
+            //Command loop
             Scanner input = new Scanner(System.in);
             System.out.print("Enter command\n>");
             String cmd = input.nextLine();
@@ -30,6 +32,8 @@ public class CA3_Question5 {
         Scanner read = new Scanner(input);
         String cmd = read.next();
         String arg;
+
+        //Read command and either pass to queue, execute from queue or quit
 
         boolean run = true;
 
@@ -58,6 +62,7 @@ public class CA3_Question5 {
     }
 
     private static void queueTask(String cmd, String arg, Queue<String> q, Queue<String> taskQueue) {
+        //Add task to requested queue and to overall tasks queue
         q.add(arg);
         taskQueue.add(cmd);
 
@@ -65,7 +70,7 @@ public class CA3_Question5 {
     }
 
     private static void evalTask(Queue<String> tasks, Queue<String> takeoff, Queue<String> landing)
-    {
+    { //Read task from queue and execute it
         if(!tasks.isEmpty())
         {
             String task = tasks.remove();

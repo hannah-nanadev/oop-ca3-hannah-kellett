@@ -24,6 +24,7 @@ public class CA3_Question6
         String command="";
         int sharesTotal = 0;
 
+        //Directions outside do while loop to avoid unnecessary clutter
         System.out.println("Syntax:\nbuy <quantity of shares> <price per share>" +
                 "\nsell <quantity of shares> <price per share>");
 
@@ -31,7 +32,7 @@ public class CA3_Question6
             System.out.print("Enter command.\n>");
             command = in.next();
             if(command.equalsIgnoreCase("buy"))
-            {
+            { //Adds bundle of shares to queue
                 int qty = in.nextInt();
                 double price = in.nextDouble();
 
@@ -39,7 +40,7 @@ public class CA3_Question6
 
             }
             else if(command.equals("sell"))
-            {
+            { //Removes a certain amount of shares from bundle(s) at head and calculates profit made
                 int qty = in.nextInt();
                 double price = in.nextDouble();
 
@@ -51,7 +52,7 @@ public class CA3_Question6
                     double buyPrices = 0;
 
                     while(sold>0)
-                    {
+                    { //Go through queue peeking/reducing/removing bundles and calculating profit
                         int topQty = shares.peek().getQuantity();
 
                         if(sold<=topQty){
