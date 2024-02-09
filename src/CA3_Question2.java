@@ -1,5 +1,4 @@
 import java.util.Arrays;
-import java.util.Scanner;
 import java.util.Stack;
 
 /**
@@ -13,7 +12,6 @@ public class CA3_Question2
 
      */
     public static int[][]  floodFillStart() {
-        Scanner kb = new Scanner(System.in);
         int[][] arr = new int[10][10];
         for (int x = 0; x < 10; x++)
         {
@@ -22,6 +20,12 @@ public class CA3_Question2
                 arr[x][y] = 0;
             }
         }
+
+        arr[5][9] = -1; arr[6][6] = -1;
+        arr[5][8] = -1; arr[7][6] = -1;
+        arr[5][7] = -1; arr[8][6] = -1;
+        arr[5][6] = -1; arr[9][6] = -1;
+
        return arr;
     }
     /*
@@ -82,7 +86,7 @@ public class CA3_Question2
     public static void start()
     {
         int[][] arr = floodFillStart();
-        floodFill(arr, 5, 5);
+        floodFill(arr, 5, 3);
 
         display(arr);
 
