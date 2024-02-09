@@ -85,10 +85,16 @@ public class CA3_Question2
 
     public static void start()
     {
+        System.out.println("Flood fill 1 - outside the box");
         int[][] arr = floodFillStart();
         floodFill(arr, 5, 3);
-
         display(arr);
+
+        System.out.println("Flood fill 2 - inside the box");
+        int[][] arr2 = floodFillStart();
+        floodFill(arr2, 7, 7);
+
+        display(arr2);
 
     }
 
