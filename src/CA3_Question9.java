@@ -24,8 +24,7 @@ public class CA3_Question9 {
         //Repeatedly solve until stack is empty
         while(!unexplored.isEmpty())
         {
-            Cell current = unexplored.pop();
-            solve(current.getX(), current.getY(), maze, unexplored);
+            solve(unexplored.pop(), maze, unexplored);
             System.out.println("Step " + i);
             display(maze);
             i++;
@@ -78,8 +77,11 @@ public class CA3_Question9 {
 
     }
 
-    public static void solve(int x, int y, int[][] maze, Stack<Cell> unexplored)
+    public static void solve(Cell pos, int[][] maze, Stack<Cell> unexplored)
     {
+        int x = pos.getX();
+        int y = pos.getY();
+
         try
         { //Try/catch block to make sure cell exists
             if(maze[x][y]==-1)
@@ -101,26 +103,49 @@ public class CA3_Question9 {
                 else
                 {
                     //Push nearby unexplored paths onto stack
-                    if(maze[x][y+1]==0) //North
+                    if(maze[x][y-1]==0) //North
                     {
-                        unexplored.push(new Cell(x, y+1));
+                        unexplored.push(resolveDir(pos, DIRECTION.NORTH));
                     }
                     if(maze[x+1][y]==0) //East
                     {
-                        unexplored.push(new Cell(x+1, y));
+                        unexplored.push(resolveDir(pos, DIRECTION.EAST));
                     }
-                    if(maze[x][y-1]==0) //South
+                    if(maze[x][y+1]==0) //South
                     {
-                        unexplored.push(new Cell(x, y-1));
+                        unexplored.push(resolveDir(pos, DIRECTION.SOUTH));
                     }
                     if(maze[x-1][y]==0) //West
                     {
-                        unexplored.push(new Cell(x-1, y));
+                        unexplored.push(resolveDir(pos, DIRECTION.WEST));
                     }
                 }
             }
         }catch(Exception e){
             System.out.println("Invalid position was passed to function. Ignoring.");
         }
+    }
+
+    public static Cell resolveDir(Cell cell, DIRECTION dir)
+    {
+        int x = cell.getX();
+        int y = cell.getY();
+
+        switch(dir)
+        {
+            case NORTH:
+                y--;
+                break;
+            case EAST:
+                x++;
+                break;
+            case SOUTH:
+                y++;
+                break;
+            case WEST:
+                x--;
+                break;
+        }
+        return new Cell(x, y);
     }
 }
