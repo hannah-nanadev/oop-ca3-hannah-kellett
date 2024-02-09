@@ -16,44 +16,51 @@ import java.util.Scanner;
 public class CA3_Question10
 {
     public static void main(String[] args) {
-        Map<String, TreeSet<DistanceTo>> connections = readConnections();
+        File file = new File("citymap.txt");
+        Map<String, TreeSet<DistanceTo>> connections = readConnections(file);
 
-        Scanner input = new Scanner(System.in);
-        System.out.print("Please enter a city name: ");
-        String from = input.nextLine();
-
-        //Create and initialise priority queue
-        PriorityQueue<DistanceTo> queue = new PriorityQueue<>();
-        queue.add(new DistanceTo(from, 0));
-
-        Map<String, Integer> shortestKnownDistance = new TreeMap<>();
-
-        //Algorithm to add elements to shortestKnownDistance
-        while(!queue.isEmpty())
+        try
         {
-            DistanceTo current = queue.poll();
-            String cTarget = current.getTarget();
-            if(!shortestKnownDistance.containsKey(cTarget))
-            {
-                //Add new target to map
-                shortestKnownDistance.put(cTarget, current.getDistance());
+            Scanner input = new Scanner(file);
+            String from = input.next();
 
-                for(int i = 0; i<connections.get(cTarget).size(); i++)
+            //Create and initialise priority queue
+            PriorityQueue<DistanceTo> queue = new PriorityQueue<>();
+            queue.add(new DistanceTo(from, 0));
+
+            Map<String, Integer> shortestKnownDistance = new TreeMap<>();
+
+            //Algorithm to add elements to shortestKnownDistance
+            while(!queue.isEmpty())
+            {
+                DistanceTo current = queue.poll();
+                String cTarget = current.getTarget();
+                if(!shortestKnownDistance.containsKey(cTarget))
                 {
-                    DistanceTo dConn = connections.get(cTarget).pollFirst();
-                    DistanceTo nConn = new DistanceTo(dConn.getTarget(),
-                            current.getDistance()+dConn.getDistance());
-                    queue.add(nConn);
+                    //Add new target to map
+                    shortestKnownDistance.put(cTarget, current.getDistance());
+
+                    if(connections.get(cTarget)!=null) //Make sure list of connections isn't null
+                    { //Connections are stored one-way to prevent the algorithm looping in on itself here
+                        for(int i = 0; i<connections.get(cTarget).size(); i++)
+                        {
+                            DistanceTo dConn = connections.get(cTarget).pollFirst();
+                            queue.add(new DistanceTo(dConn.getTarget(), dConn.getDistance() + current.getDistance()));
+                        }
+                    }
                 }
             }
+
+            System.out.println(shortestKnownDistance);
+        }catch(IOException e)
+        {
+            System.out.println("File not found.");
         }
 
-        System.out.println(shortestKnownDistance);
     }
 
-    public static Map<String, TreeSet<DistanceTo>> readConnections()
+    public static Map<String, TreeSet<DistanceTo>> readConnections(File file)
     {
-        File file = new File("citymap.txt");
         Map<String, TreeSet<DistanceTo>> map = new TreeMap<>();
 
         try
