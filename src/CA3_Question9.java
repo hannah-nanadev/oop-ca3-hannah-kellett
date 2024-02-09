@@ -137,20 +137,11 @@ public class CA3_Question9 {
         int x = cell.getX();
         int y = cell.getY();
 
-        switch(dir)
-        {
-            case NORTH:
-                y--;
-                break;
-            case EAST:
-                x++;
-                break;
-            case SOUTH:
-                y++;
-                break;
-            case WEST:
-                x--;
-                break;
+        switch (dir) {
+            case NORTH -> y--;
+            case EAST -> x++;
+            case SOUTH -> y++;
+            case WEST -> x--;
         }
         return new Cell(x, y);
     }
