@@ -19,11 +19,11 @@ public class CA3_Question3
             int lineNo = 1;
 
             while(line.hasNextLine())
-            {
+            { //Take full line first to be scanned by another scanner (for line number)
                 String current = line.nextLine();
 
                 Scanner in = new Scanner(current);
-                in.useDelimiter("[^A-Za-z0-9_]+");
+                in.useDelimiter("[^A-Za-z0-9_]+"); //Delimiter to properly pick out identifiers
 
                 while(in.hasNext())
                 {

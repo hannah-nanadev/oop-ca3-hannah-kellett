@@ -20,6 +20,7 @@ public class CA3_Question2
             }
         }
 
+        //Build closed-off -1 area to better illustrate flood fill
         arr[5][9] = -1; arr[6][6] = -1;
         arr[5][8] = -1; arr[7][6] = -1;
         arr[5][7] = -1; arr[8][6] = -1;
@@ -48,6 +49,7 @@ public class CA3_Question2
         cells.push(new Cell(startX, startY));
         int i = 1;
 
+        //Keep filling until stack is emptied (no more reachable cells)
         while(!cells.isEmpty())
         {
             Cell current = cells.pop();
@@ -84,6 +86,7 @@ public class CA3_Question2
 
     public static void start()
     {
+        //Two different scenarios to demonstrate flood fill
         System.out.println("Flood fill 1 - outside the box");
         int[][] arr = floodFillStart();
         floodFill(arr, 5, 3);
